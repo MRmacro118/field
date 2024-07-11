@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Movie</title>
+    <link rel="stylesheet" href="movie.css">
+</head>
+<body>
+    <header>
+        <h1 id="movie-title">Loading...</h1>
+    </header>
+    <div class="container">
+        <a href="index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M20.5 11H6.414l4.293-4.293a1 1 0 0 0-1.414-1.414l-6 6a1 1 0 0 0 0 1.414l6 6a1 1 0 0 0 1.414-1.414L6.414 13H20.5a1 1 0 0 0 0-2z"/>
+            </svg>
+        </a>
+        <video id="movie-video" controls width="100%">
+            Your browser does not support the video tag.
+        </video>
+        <div class="additional-info">
+            <div id="movie-description" class="movie-description">Loading...</div>
+            <div id="movie-genres" class="movie-genres"></div>
+            <div id="movie-release-year" class="movie-release-year"></div>
+        </div>
+    </div>
+
+    <script>
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = getParameterByName('title');
+            const movies = JSON.parse(localStorage.getItem('movies')) || [];
+            const movie = movies.find(m => m.title === title);
+            if (movie) {
+                document.getElementById('movie-title').textContent = movie.title;
+                document.getElementById('movie-description').textContent = movie.description;
+                document.getElementById('movie-genres').textContent = `Genres: ${movie.genres.join(', ')}`;
+                document.getElementById('movie-release-year').textContent = `Release Year: ${movie.releaseYear}`;
+                const videoElement = document.getElementById('movie-video');
+                videoElement.src = movie.video;
+                videoElement.innerHTML = `<source src="${movie.video}" type="video/mp4">Your browser does not support the video tag.`;
+            }
+        });
+    </script>
+</body>
+</html>

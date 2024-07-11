@@ -1,0 +1,63 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.movie {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.movie:hover {
+    transform: scale(1.02);
+}
+
+.movie img {
+    width: 150px;
+    height: auto;
+}
+
+.movie-details {
+    padding: 20px;
+    flex-grow: 1;
+    background: #fff;
+}
+
+.movie-title {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.movie-description {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #666;
+}
+
+.additional-info {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
